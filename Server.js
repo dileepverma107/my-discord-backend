@@ -5,8 +5,6 @@ const { Client, GatewayIntentBits, ChannelType } = require('discord.js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const WebSocket = require('ws');
-const fs = require('fs');
-const path = require('path');
 
 const app = express();
 const port = 3001;
@@ -14,10 +12,9 @@ const port = 3001;
 app.use(bodyParser.json());
 app.use(cors());
 
-const config = JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
-const YOUR_DISCORD_BOT_TOKEN = config.YOUR_DISCORD_BOT_TOKEN;
-const GUILD_ID = config.GUILD_ID;
-const userId = config.USER_ID;
+const YOUR_DISCORD_BOT_TOKEN = process.env.YOUR_DISCORD_BOT_TOKEN;
+const GUILD_ID = process.env.GUILD_ID;
+const userId = process.env.USER_ID;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
