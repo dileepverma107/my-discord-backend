@@ -1,5 +1,3 @@
-// server.js
-
 const express = require('express');
 const { Client, GatewayIntentBits, ChannelType } = require('discord.js');
 const bodyParser = require('body-parser');
@@ -7,7 +5,7 @@ const cors = require('cors');
 const WebSocket = require('ws');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001; // Use process.env.PORT for Vercel
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -25,7 +23,7 @@ client.once('ready', () => {
 client.login(YOUR_DISCORD_BOT_TOKEN);
 
 let connections = [];
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ server: app }); // Use the express app as WebSocket server
 
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
@@ -109,5 +107,5 @@ app.post('/send-message', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
 });
