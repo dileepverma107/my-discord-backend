@@ -15,6 +15,7 @@ client.on('messageCreate', (message) => {
     username: message.author.username,
     content: message.content,
     timestamp: message.createdTimestamp,
+    channelId: message.channel.id,
   };
 
   connections.forEach((ws) => {
