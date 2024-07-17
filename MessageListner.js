@@ -6,6 +6,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBit
 const wss = new WebSocket.Server({ port: 8080 });
 
 let connections = [];
+const YOUR_DISCORD_BOT_TOKEN = process.env.YOUR_DISCORD_BOT_TOKEN;
 
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
@@ -30,4 +31,4 @@ wss.on('connection', (ws) => {
   });
 });
 
-client.login('MTI2MTcxMzg3Nzk1NjAzODY2OA.GtDjN-.qJs3kJ4OkrRghJHVmSRLqcE_lGbHymTMFxVV_Y');
+client.login(YOUR_DISCORD_BOT_TOKEN);
